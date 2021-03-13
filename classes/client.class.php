@@ -84,4 +84,17 @@ class Client
             echo $exception->getMessage();
         }
     }
+
+    public function deleteClient($id)
+    {
+        try {
+            $sql = 'DELETE FROM clients WHERE id = :clt_id';
+            $result = $this->pdo->prepare($sql);
+            $result->bindparam(":clt_id", $id);
+            $result->execute();
+            return $result;
+        } catch (PDOException $exception) {
+            echo $exception->getMessage();
+        }
+    }
 }
