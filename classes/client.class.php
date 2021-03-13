@@ -36,7 +36,7 @@ class Client
         }
     }
 
-    public function addNewClient($nom, $prenom, $dateNaissance, $adress, $tel)
+    public function addNewClient($nom, $prenom, $dateNaissance, $address, $tel)
     {
         try {
             $sql = "
@@ -44,7 +44,7 @@ class Client
                 VALUES (?, ?, ?, ?, ?)
                 ";
             $query = $this->pdo->prepare($sql);
-            $query->execute([$nom, $prenom, $dateNaissance, $adress, $tel]);
+            $query->execute([$nom, $prenom, $dateNaissance, $address, $tel]);
             return $query;
         } catch (PDOException $e) {
             echo $e->getMessage();
