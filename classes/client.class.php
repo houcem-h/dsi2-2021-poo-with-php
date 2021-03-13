@@ -50,4 +50,38 @@ class Client
             echo $e->getMessage();
         }
     }
+
+    public function updateClient($id, $nom, $prenom, $dateBirth, $adr, $tel)
+    {
+        try {
+            // $sql = 'UPDATE clients
+            //         SET nom = :clt_nom,
+            //             prenom = :clt_prenom,
+            //             datenaissance = :clt_dateN,
+            //             adresse = :clt_adr,
+            //             tel = :clt_tel
+            //         WHERE id = :clt_id';
+            // $result = $this->pdo->prepare($sql);
+            // $result->bindparam(":clt_id", $id);
+            // $result->bindparam(":clt_nom", $nom);
+            // $result->bindparam(":clt_prenom", $prenom);
+            // $result->bindparam(":clt_dateN", $dateBirth);
+            // $result->bindparam(":clt_adr", $adr);
+            // $result->bindparam(":clt_tel", $tel);
+            // $result->execute();
+            // ou bien
+            $sql = 'UPDATE clients
+                    SET nom = ?,
+                        prenom = ?,
+                        datenaissance = ?,
+                        adresse = ?,
+                        tel = ?
+                    WHERE id = ?';
+            $result = $this->pdo->prepare($sql);
+            $result->execute([$nom, $prenom, $dateBirth, $adr, $tel, $id]);
+            return $result;
+        } catch (PDOException $exception) {
+            echo $exception->getMessage();
+        }
+    }
 }
